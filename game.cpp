@@ -1,9 +1,26 @@
-#include <algorithm>
 #include <bits/stdc++.h>
+#include <cstdlib>
 using namespace std;
 
 #include <unistd.h>
 #include <termios.h>
+
+// Códigos de Cores ANSI
+const string RESET   = "\033[0m";
+const string SHINY = "\033[93m"; // Tom de amarelo mais vivo para itens
+const string VERDE   = "\033[32m";
+const string AZUL    = "\033[34m";
+const string CINZA   = "\033[90m";
+const string AMARELO = "\033[33m";
+const string VERMELHO= "\033[31m";
+
+// Elementos do Jogo
+const char ESTRELA = '*';
+const char CHAO    = '.';
+const char PAREDE  = '#'; // Ou utilize bloco sólido '█'
+const char AGUA    = '~';
+const char ARVORE  = 'T';
+const char JOGADOR = 'X';
 
 const int width = 100, height = 100;
 char getch() {
