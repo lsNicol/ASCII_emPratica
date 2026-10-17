@@ -64,6 +64,17 @@ void gerarMapa() {
         }
     }
 }
+void gerarEstrelas(){
+    int e = 0;
+    while (e < 3){
+        int randX = rand() % width;
+        int randY = rand() % height;
+        if (canvas[randY][randX] == CHAO){
+            canvas[randY][randX] = ESTRELA;
+            e++;
+        }
+    }
+}
 void drawCanvas(Pos posicao){
 	pair<Pos, Pos> range;
 	int range_valX = 20, range_valY = 10;
