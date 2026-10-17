@@ -48,6 +48,22 @@ struct Pos{
 	int Y;
 };
 vector<vector<char>> canvas(height, vector<char>(width, '.'));
+void gerarMapa() {
+    srand(time(0));
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            if (i == 0 || i == height - 1 || j == 0 || j == width - 1) {
+                canvas[i][j] = PAREDE;
+            } else {
+                int r = rand() % 100;
+                if (r < 5) canvas[i][j] = ARVORE;
+                else if (r < 8) canvas[i][j] = AGUA;
+                else if (r < 10) canvas[i][j] = PAREDE;
+                else canvas[i][j] = CHAO;
+            }
+        }
+    }
+}
 void drawCanvas(Pos posicao){
 	pair<Pos, Pos> range;
 	int range_valX = 20, range_valY = 10;
