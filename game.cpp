@@ -162,6 +162,39 @@ int main() {
             running = false;
             break;
         }
+        if (canvas[posY][posX] == ESTRELA){
+            score++;
+            cout << "!! VC econtrou uma ESTRELA !! ("<<score<<"/3)\n";
+            if (score == 3) {
+                limpar_tela();
+                cout << SHINY;
+                cout << 
+"          III| |III\n" <<
+"        IIIII| |IIIII\n" <<
+"       IIIIII| |IIIIII       __  ______  __  _   _ _  _ ___ _   _ _\n" <<
+"       IIIIII| |IIIIII       \\ \\/ / __ \\/ / / | / / |/ /_  _/ | / / |\n" <<
+"      IIIIIII| |IIIIIII       \\  / /_/ / /__| |/ /|   /  / /| |/ /|_|\n" <<
+"      IIIIIII\\ /IIIIIII       /_/\\____/\\____/___/ |_|/  /___/___/ (_)\n" <<
+"     II (___)| |(___) II\n" <<
+"    II  \\    /D\\    /  II\n" <<
+"   II  \\ \\  /| |\\  / /  II\n" <<
+"  II    \\_\\/|| ||\\/_/    II\n" <<
+" II     / O-------O \\     II\n" <<
+"II_____/   \\|||||/   \\_____II\n" <<
+"      /               \\ \n" <<
+"      |_______________|" << endl;
+                cout << " Parabéns! Você encontrou todas as 3 estrelas!\n\n";
+                cout << " Pressione QUALQUER tecla para encerrar o jogo...\n";
+                char OP = getch();
+                if (OP == 'c' || OP == 'C')
+                    continue;
+                running = false;
+            }
+            else
+                getch();
+
+            canvas[posY][posX] = CHAO;
+        }
     }
 
     return 0;
