@@ -100,50 +100,58 @@ void drawCanvas(Pos posicao){
 	for (int i = y1; i <= y2; i++){
 		for (int j = x1; j <= x2; j++){
 			if (i == Y && j == X)
-				cout << 'X';
-			else 
-				cout << '.';
+				cout << VERMELHO << 'X' << RESET;
+            else {
+                char tile = canvas[i][j];
+                switch(tile) {
+                    case PAREDE: cout << CINZA << PAREDE << RESET; break;
+                    case ARVORE: cout << VERDE << ARVORE << RESET; break;
+                    case AGUA:   cout << AZUL << AGUA << RESET; break;
+                    case ESTRELA:cout << SHINY << ESTRELA << RESET; break;
+                    default: cout << CHAO; break;
+                }
+            }
 		}
 		cout << "\n";
 	}
 }
 int main() {
-    // 1. Corrigido: Ordem correta {X, Y} -> Largura primeiro, Altura depois
+    gerarMapa();
+    gerarEstrelas();
     Pos spawn = {width / 2, height / 2};
     Pos posicao = spawn;
+    int score = 0;
     
-    // Desenha o estado inicial
     drawCanvas(posicao);
+    cout << "\nScore: " << score << "\n";
     bool running = true;
     
     while (running){
         limpar_tela();
         cout << "Movimento: WASD | Attack: [ESPACO] | Guia: G | Voltar ao Menu: Q\n\n";
         
-        // Desenha a posição atualizada do frame anterior
         drawCanvas(posicao);
-        
-        // Referências diretas para facilitar a leitura do switch
+        cout << "\nScore: " << score << "\n";
+
         int &posX = posicao.X;
         int &posY = posicao.Y;
         
         char acao = getch();
-        
         switch (acao){
         case 'w': case 'W': 
-            if (posY > 0) 
+            if (posY > 0 && (canvas[posY-1][posX] == CHAO || canvas[posY-1][posX] == ESTRELA)) 
                 posY--; 
             break;
         case 'a': case 'A':
-            if (posX > 0)
+            if (posX > 0 && (canvas[posY][posX-1] == CHAO || canvas[posY][posX-1] == ESTRELA))
                 posX--;
             break;
         case 's': case 'S':
-            if (posY < height-1)
+            if (posY < height-1 && (canvas[posY+1][posX] == CHAO || canvas[posY+1][posX] == ESTRELA))
                 posY++; 
             break;
         case 'd': case 'D':
-            if (posX < width-1)
+            if (posX < width-1 && (canvas[posY][posX+1] == CHAO || canvas[posY][posX+1] == ESTRELA))
                 posX++; 
             break;
         case ' ': 
